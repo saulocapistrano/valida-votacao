@@ -6,5 +6,6 @@
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <include file="create-pauta.xml" relativeToChangelogFile="true"/>
+    <include file="create-sessao-votacao.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
