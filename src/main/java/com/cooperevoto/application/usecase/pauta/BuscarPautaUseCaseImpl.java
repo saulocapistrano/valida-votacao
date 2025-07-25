@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
 public class BuscarPautaUseCaseImpl implements BuscarPautaUseCase {
 
     private final PautaRepository pautaRepository;
