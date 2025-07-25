@@ -1,0 +1,25 @@
+<changeSet id="003-create-voto" author="saulo-capistrano">
+    <createTable tableName="voto">
+        <column name="id" type="BIGINT" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="cpf" type="VARCHAR(11)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="voto" type="VARCHAR(10)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="pauta_id" type="BIGINT">
+            <constraints nullable="false" foreignKeyName="fk_voto_pauta" references="pauta(id)"/>
+        </column>
+        <column name="sessao_id" type="BIGINT">
+            <constraints nullable="false" foreignKeyName="fk_voto_sessao" references="sessao_votacao(id)"/>
+        </column>
+        <column name="data_voto" type="TIMESTAMP"/>
+    </createTable>
+
+    <addUniqueConstraint
+            tableName="voto"
+            columnNames="cpf, pauta_id"
+            constraintName="uk_voto_unico_por_pauta"/>
+</changeSet>
