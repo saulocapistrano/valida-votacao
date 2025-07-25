@@ -7,5 +7,6 @@
 
     <include file="create-pauta.xml" relativeToChangelogFile="true"/>
     <include file="create-sessao-votacao.xml" relativeToChangelogFile="true"/>
+    <include file="create-voto.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
