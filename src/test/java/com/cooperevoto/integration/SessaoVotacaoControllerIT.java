@@ -43,7 +43,7 @@ public class SessaoVotacaoControllerIT {
     void setUp() {
         sessaoRepository.deleteAll();
         pautaRepository.deleteAll();
-        pauta = pautaRepository.save(new Pauta(null, "Sessão Teste", "Pauta com sessão"));
+        pauta = pautaRepository.save(new Pauta(1L, "titulo", "descricao", null));
     }
 
     @Test
