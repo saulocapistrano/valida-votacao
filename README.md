@@ -6,7 +6,7 @@ A aplicação permite o cadastro de pautas, abertura de sessões de votação co
 
 ## 🚀 Como Executar o Projeto
 
-> É necessário ter o **Docker** e o **Docker Compose** instalados.
+> É necessário ter o **Docker** e o **Docker Compose** instalados, além disso o docker descktop deve está rodando para a inicialização dos containers.
 
 1. Clone o repositório:
 
@@ -146,6 +146,8 @@ Durante o desenvolvimento da API Coopere Voto, foram feitas escolhas técnicas e
 * **JUnit 5 + Mockito**: Frameworks de testes modernos utilizados para validar as regras de negócio com testes unitários e mocks.
 
 * **Jacoco**: Ferramenta de cobertura de testes utilizada para garantir que os testes estão cobrindo os fluxos críticos da aplicação.
+
+* **Redis**: A aplicação utiliza Redis como mecanismo de cache para melhorar a performance em chamadas repetitivas de verificação de CPF.
 
 
 
