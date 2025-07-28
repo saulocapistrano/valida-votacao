@@ -8,6 +8,9 @@ import com.cooperevoto.domain.model.SessaoVotacao;
 import com.cooperevoto.domain.repository.PautaRepository;
 import com.cooperevoto.domain.repository.SessaoVotacaoRepository;
 import com.cooperevoto.domain.repository.VotoRepository;
+import com.cooperevoto.exception.BusinessException;
+import com.cooperevoto.infrastructure.client.cpf.service.CpfValidationService;
+import com.cooperevoto.infrastructure.client.cpf.vo.CpfStatusResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
 class CadastrarVotoUseCaseImplTest {
@@ -32,6 +35,9 @@ class CadastrarVotoUseCaseImplTest {
 
     @Mock
     private SessaoVotacaoRepository sessaoRepository;
+
+    @Mock
+    private CpfValidationService cpfValidationService;
 
     @InjectMocks
     private CadastrarVotoUseCaseImpl cadastrarVotoUseCase;
@@ -48,22 +54,26 @@ class CadastrarVotoUseCaseImplTest {
         when(votoRepository.existsByCpfAndPautaId(request.getCpf(), request.getPautaId()))
                 .thenReturn(true);
 
-        assertThrows(IllegalArgumentException.class, () ->
-                cadastrarVotoUseCase.executar(request));
+        when(cpfValidationService.validar(request.getCpf()))
+                .thenReturn(new CpfStatusResponse("ABLE_TO_VOTE"));
+
+        assertThrows(BusinessException.class, () -> cadastrarVotoUseCase.executar(request));
     }
 
     @Test
     void deveLancarExcecao_QuandoPautaNaoExiste() {
         var request = new VotoRequest("12345678901", 1L, TipoVoto.SIM);
 
-
         when(votoRepository.existsByCpfAndPautaId(request.getCpf(), request.getPautaId()))
                 .thenReturn(false);
+
+        when(cpfValidationService.validar(request.getCpf()))
+                .thenReturn(new CpfStatusResponse("ABLE_TO_VOTE"));
 
         when(pautaRepository.findById(request.getPautaId()))
                 .thenReturn(Optional.empty());
 
-        assertThrows(Exception.class, () -> cadastrarVotoUseCase.executar(request));
+        assertThrows(RuntimeException.class, () -> cadastrarVotoUseCase.executar(request));
     }
 
     @Test
@@ -75,14 +85,16 @@ class CadastrarVotoUseCaseImplTest {
         when(votoRepository.existsByCpfAndPautaId(request.getCpf(), request.getPautaId()))
                 .thenReturn(false);
 
+        when(cpfValidationService.validar(request.getCpf()))
+                .thenReturn(new CpfStatusResponse("ABLE_TO_VOTE"));
+
         when(pautaRepository.findById(1L))
                 .thenReturn(Optional.of(pauta));
 
         when(sessaoRepository.findByPautaId(1L))
                 .thenReturn(Optional.empty());
 
-        assertThrows(IllegalStateException.class, () ->
-                cadastrarVotoUseCase.executar(request));
+        assertThrows(IllegalStateException.class, () -> cadastrarVotoUseCase.executar(request));
     }
 
     @Test
@@ -100,13 +112,15 @@ class CadastrarVotoUseCaseImplTest {
         when(votoRepository.existsByCpfAndPautaId(request.getCpf(), request.getPautaId()))
                 .thenReturn(false);
 
+        when(cpfValidationService.validar(request.getCpf()))
+                .thenReturn(new CpfStatusResponse("ABLE_TO_VOTE"));
+
         when(pautaRepository.findById(1L))
                 .thenReturn(Optional.of(pauta));
 
         when(sessaoRepository.findByPautaId(1L))
                 .thenReturn(Optional.of(sessao));
 
-        assertThrows(IllegalStateException.class, () ->
-                cadastrarVotoUseCase.executar(request));
+        assertThrows(BusinessException.class, () -> cadastrarVotoUseCase.executar(request));
     }
 }
