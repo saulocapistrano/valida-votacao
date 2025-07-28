@@ -5,13 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <include file="create-pauta.xml" relativeToChangelogFile="true"/>
-    <include file="create-sessao-votacao.xml" relativeToChangelogFile="true"/>
-    <include file="create-voto.xml" relativeToChangelogFile="true"/>
-
-    <changeSet id="004-add-resultado-column-pauta" author="seu-nome">
+    <changeSet id="004-add-resultado-to-pauta" author="saulo-capistrano">
         <addColumn tableName="pauta">
-            <column name="resultado" type="VARCHAR(20)"/>
+            <column name="resultado" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
         </addColumn>
     </changeSet>
 

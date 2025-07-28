@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -20,7 +21,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-
+@ActiveProfiles("test")
 class CadastrarVotoUseCaseImplTest {
 
     @Mock
@@ -69,7 +70,7 @@ class CadastrarVotoUseCaseImplTest {
     void deveLancarExcecao_QuandoSessaoNaoExiste() {
         var request = new VotoRequest("12345678901", 1L, TipoVoto.SIM);
 
-        var pauta = new Pauta(1L, "Teste", "Desc");
+        var pauta = new Pauta(1L, "titulo", "descricao", null);
 
         when(votoRepository.existsByCpfAndPautaId(request.getCpf(), request.getPautaId()))
                 .thenReturn(false);
@@ -88,7 +89,7 @@ class CadastrarVotoUseCaseImplTest {
     void deveLancarExcecao_QuandoSessaoFechada() {
         var request = new VotoRequest("12345678901", 1L, TipoVoto.SIM);
 
-        var pauta = new Pauta(1L, "Teste", "Desc");
+        var pauta = new Pauta(1L, "titulo", "descricao", null);
         var sessao = SessaoVotacao.builder()
                 .id(1L)
                 .pauta(pauta)
