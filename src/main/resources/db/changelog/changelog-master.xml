@@ -9,4 +9,10 @@
     <include file="create-sessao-votacao.xml" relativeToChangelogFile="true"/>
     <include file="create-voto.xml" relativeToChangelogFile="true"/>
 
+    <changeSet id="004-add-resultado-column-pauta" author="seu-nome">
+        <addColumn tableName="pauta">
+            <column name="resultado" type="VARCHAR(20)"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
