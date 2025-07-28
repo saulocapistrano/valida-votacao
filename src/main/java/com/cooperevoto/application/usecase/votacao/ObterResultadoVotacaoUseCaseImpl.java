@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ObterResultadoVotacaoUseCaseImpl implements ObterResultadoVotacaoUseCase {
 
-    private final PautaRepositor:y pautaRepository;
+    private final PautaRepository pautaRepository;
     private final SessaoVotacaoRepository sessaoRepository;
     private final VotoRepository votoRepository;
 
