@@ -38,6 +38,12 @@ services:
     volumes:
       - kafka_data:/bitnami/kafka
 
+  redis:
+    image: redis:7.2
+    container_name: coopere-redis
+    ports:
+      - "6379:6379"
+    restart: always
 
   api:
     build: .
@@ -49,6 +55,8 @@ services:
       postgres:
         condition: service_healthy
       kafka:
+        condition: service_started
+      redis:
         condition: service_started
     environment:
       SPRING_PROFILES_ACTIVE: docker
