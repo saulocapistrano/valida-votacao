@@ -20,4 +20,8 @@ public class Pauta {
     private String titulo;
 
     private String descricao;
+
+    @Column(name = "resultado")
+    private String resultado;
+
 }
