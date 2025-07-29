@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class AbrirSessaoRequest {
 
-    @NotNull
+    @NotNull(message = "O ID da pauta é obrigatório")
     private Long pautaId;
 
-    @Min(1)
+    @Min(value = 1, message = "A duração mínima da sessão deve ser de 1 minuto")
     private Integer duracaoMinutos;
 
 
