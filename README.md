@@ -150,6 +150,13 @@ Durante o desenvolvimento da API Coopere Voto, foram feitas escolhas técnicas e
 * **Redis**: A aplicação utiliza Redis como mecanismo de cache para melhorar a performance em chamadas repetitivas de verificação de CPF.
 
 
+## Considerações Finais e Melhorias Futuras
+
+- A estrutura atual já está preparada para adição de eventos Kafka (ex: notificar voto registrado), embora não tenha sido utilizado nesta entrega.
+- Poderia ser implementado um mecanismo de auditoria (`created_at`, `updated_at`) com Spring Data Auditing.
+- Os modelos de domínio foram mapeados diretamente com JPA para facilitar a entrega. Em um projeto mais robusto, adotaria-se uma separação total do domínio puro com mapeamento via adapters e mappers, seguindo os princípios do DDD e da arquitetura hexagonal.
+
+
 
 ## 👨‍💻 Autor
 
