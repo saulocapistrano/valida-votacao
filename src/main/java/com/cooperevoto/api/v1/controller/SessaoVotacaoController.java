@@ -4,6 +4,7 @@ import com.cooperevoto.api.v1.dto.request.AbrirSessaoRequest;
 import com.cooperevoto.api.v1.dto.response.SessaoVotacaoResponse;
 import com.cooperevoto.application.usecase.votacao.AbrirSessaoUseCase;
 import com.cooperevoto.domain.repository.SessaoVotacaoRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class SessaoVotacaoController {
     @PostMapping("/pautas/{id}/sessao")
     public ResponseEntity<SessaoVotacaoResponse> abrirSessao(
             @PathVariable Long id,
-            @RequestBody(required = false) AbrirSessaoRequest request) {
+            @RequestBody(required = false) @Valid AbrirSessaoRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(abrirSessaoUseCase.executar(id, request));
     }
