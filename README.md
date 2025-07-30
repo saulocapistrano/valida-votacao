@@ -12,7 +12,7 @@ A aplicação permite o cadastro de pautas, abertura de sessões de votação co
 
 ```bash
 git clone https://github.com/saulocapistrano/valida-votacao.git
-cd coopere-voto
+cd valida-votacao
 ````
 
 2. Execute o script:
