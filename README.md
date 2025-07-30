@@ -11,7 +11,7 @@ A aplicação permite o cadastro de pautas, abertura de sessões de votação co
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/saulocapistrano/coopere-voto.git
+git clone https://github.com/saulocapistrano/valida-votacao.git
 cd coopere-voto
 ````
 
